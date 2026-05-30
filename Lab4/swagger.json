@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Enterprise API (Lab 4)",
+    "version": "1.0.0",
+    "description": "API для роботи з підприємствами"
+  },
+  "paths": {
+    "/enterprises": {
+      "get": {
+        "summary": "Отримати всі підприємства",
+        "responses": {
+          "200": { "description": "Успішно" }
+        }
+      }
+    },
+    "/enterprises/new": {
+      "post": {
+        "summary": "Додати нове підприємство",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enterprise_name": { "type": "string", "example": "Global Invest Group" },
+                  "type_of_ownership": { "type": "string", "example": "ТОВ" },
+                  "address": { "type": "string", "example": "м. Київ, вул. Хрещатик, 1" },
+                  "tel_number": { "type": "string", "example": "+380441234567" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Створено" }
+        }
+      }
+    },
+    "/enterprises/{id}": {
+      "delete": {
+        "summary": "Видалити підприємство за ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "MongoDB ID підприємства"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Успішно видалено" },
+          "404": { "description": "Не знайдено" }
+        }
+      }
+    }
+  }
+}
